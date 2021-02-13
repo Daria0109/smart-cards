@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+
+.select {
+  display: block;
+  width: 200px;
+  padding: 6px 10px;
+  font-size: 16px;
+  line-height: 5em;
+  font-weight: bolder;
+  background-color: lightgreen;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.option {
+  background-color: lightcyan;
+  border-radius: 5px;
+
+}

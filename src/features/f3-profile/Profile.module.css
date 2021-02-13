@@ -1,0 +1,55 @@
+.profile {
+    width: 100%;
+    min-height: 100vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 100px;
+}
+
+.initializedError {
+    margin: 0 auto;
+    width: max-content;
+    padding: 10px 15px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 1px 1px 5px rgba(000, 000, 000, 0.3);
+    text-align: center;
+    font-size: 20px;
+    color: #cc1b08;
+}
+
+.userProfile {
+    width: 60%;
+    max-width: 100%;
+    border: 1px solid #c6c6c6;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 1px 1px 5px rgba(000, 000, 000, 0.3);
+    border-radius: 8px;
+}
+
+.avatar {
+    margin-right: 30px;
+}
+
+.avatar img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+
+.dataRow {
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.dataRow span {
+    color: #cc1b08;
+}
+

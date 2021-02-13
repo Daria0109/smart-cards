@@ -1,0 +1,64 @@
+* {
+    box-sizing: border-box;
+}
+.hw11 {
+    padding: 30px;
+    background-color: lightblue;
+}
+
+.singleRange {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+.rangeLable {
+    line-height: 1;
+    background-color: #0c2143;
+    color: #cacece;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.range {
+    margin: 0 20px;
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 10px; /* Specified height */
+    border-radius: 4px;
+    background: #606060; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+  }
+.range:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+.range::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    border-radius: 50%;
+    background: #0c2143; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+.range::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #0c2143; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+.doubleRange {
+    display: flex;
+    align-items: center;
+
+}
+.doubleRange {
+    margin: 0 20px;
+}
+
