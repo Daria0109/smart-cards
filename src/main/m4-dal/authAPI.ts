@@ -5,7 +5,7 @@ const baseLocalhostURL = 'http://localhost:7542/2.0/'
 const baseHerokuURL = 'https://neko-back.herokuapp.com/2.0/'
 
 const instance = axios.create({
-	baseURL: baseHerokuURL,
+	baseURL: baseLocalhostURL,
 	withCredentials: true,
 })
 

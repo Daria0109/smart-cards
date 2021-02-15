@@ -15,7 +15,7 @@ export const SignUp = () => {
 
   const isSignUp = useSelector<AppRootStateType, boolean>(state => state.auth.isSignUp)
   const appStatus = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-  const requestSignUpError = useSelector<AppRootStateType,string | null>(state => state.auth.signUpError)
+  const requestSignUpError = useSelector<AppRootStateType, string | null>(state => state.auth.signUpError)
   const status = useSelector<AppRootStateType, string>(state => state.app.status)
   const dispatch = useDispatch()
 
@@ -47,26 +47,28 @@ export const SignUp = () => {
     return <Redirect to={PATH.LOGIN}/>
   }
 
-  return <div className={s.container}>
-    <h2 className={s.title}>Sign Up</h2>
-    {status === 'loading' && <div>Please wait...</div>}
-    <div className={s.itemForm}>
-      <input type="text" placeholder={'Enter email...'} value={email} onChange={changeEmailHandler}/>
-    </div>
-    <div className={s.itemForm}>
-      <input type="text" placeholder={'Enter password...'} value={password} onChange={changePasswordHandler}/>
-    </div>
-    <div className={s.itemForm}>
-      <input type="text" placeholder={'Confirm password...'} value={confirmPassword} onChange={confirmPasswordHandler}/>
-    </div>
-    {validateError && <div className={s.validateError}>{validateError}</div>}
-    {requestSignUpError && <div className={s.requestError}>{requestSignUpError}</div>}
-    <div className={s.itemForm}>
-      <button className={s.button} onClick={onSubmit} disabled={appStatus === 'loading'}>Submit</button>
-    </div>
+  return <div className={s.formWrapper}>
+    <div className={s.container}>
+      <h2 className={s.title}>Sign Up</h2>
+      {status === 'loading' && <div>Please wait...</div>}
+      <div className={s.itemForm}>
+        <input type="text" placeholder={'Enter email...'} value={email} onChange={changeEmailHandler}/>
+      </div>
+      <div className={s.itemForm}>
+        <input type="text" placeholder={'Enter password...'} value={password} onChange={changePasswordHandler}/>
+      </div>
+      <div className={s.itemForm}>
+        <input type="text" placeholder={'Confirm password...'} value={confirmPassword}
+               onChange={confirmPasswordHandler}/>
+      </div>
+      {validateError && <div className={s.validateError}>{validateError}</div>}
+      {requestSignUpError && <div className={s.requestError}>{requestSignUpError}</div>}
+      <div className={s.itemForm}>
+        <button className={s.button} onClick={onSubmit} disabled={appStatus === 'loading'}>Submit</button>
+      </div>
       <NavLink to={PATH.LOGIN} className={s.link}>Log In</NavLink>
 
-    {appStatus === 'loading' && <div className={s.overflow}>Please, wait...</div>}
-
+      {appStatus === 'loading' && <div className={s.overflow}>Please, wait...</div>}
+    </div>
   </div>
 }

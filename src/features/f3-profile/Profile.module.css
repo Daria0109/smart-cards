@@ -1,17 +1,14 @@
 .profile {
+    padding-top: 90px;
     width: 100%;
     min-height: 100vh;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 100px;
 }
 
 .initializedError {
-    margin: 0 auto;
     width: max-content;
     padding: 10px 15px;
+    margin: 0 auto;
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 1px 1px 5px rgba(000, 000, 000, 0.3);
@@ -21,7 +18,8 @@
 }
 
 .userProfile {
-    width: 60%;
+    width: 700px;
+    margin: 0 auto;
     max-width: 100%;
     border: 1px solid #c6c6c6;
     padding: 20px;

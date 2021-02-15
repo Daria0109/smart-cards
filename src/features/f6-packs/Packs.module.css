@@ -1,0 +1,43 @@
+.packsPage {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 100px;
+}
+
+.table {
+    border: 1px solid black;
+}
+
+.headerTable {
+    display: flex;
+    align-items: center;
+}
+
+.headerItem {
+    padding: 20px 5px;
+    flex-basis: 18%;
+    border: 1px solid #147c05;
+    text-align: center;
+    font-weight: bold;
+}
+.row {
+    display: flex;
+    align-items: center;
+    border: 1px solid #0c2143;
+}
+.rowItem {
+    padding: 10px 5px;
+    flex-basis: 18%;
+
+    text-align: center;
+}
+.page {
+    cursor: pointer;
+    display: inline-block;
+    border: 1px solid #775298;
+    width: 30px;
+    height: 30px;
+}
+.page.active {
+    font-weight: bold;
+}

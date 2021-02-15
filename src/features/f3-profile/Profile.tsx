@@ -26,14 +26,13 @@ export const Profile = () => {
   let timerId: any;
 
   useEffect(() => {
-    if (!userId) {
+    if (!isLoggedIn) {
       dispatch(initializeProfile())
     }
-    dispatch(authActions.setLoginError(null))
     return function cleanup () {
       clearTimeout(timerId)
     }
-  }, [userId])
+  }, [])
 
   if (appStatus === 'loading') {
     return <Preloader/>
@@ -46,17 +45,13 @@ export const Profile = () => {
 
   if (initializeError) {
     timerId = setTimeout(() => {
+      dispatch(setProfileError(null))
       setIsFirst(false)
     }, 2000)
   }
 
 
-  //
-  // if (!isLoggedIn && isInitialized) {
-  //   return <Redirect to={PATH.LOGIN}/>
-  // }
-
-  return <div className={s.profile}>
+    return <div className={s.profile}>
     {isLoggedIn && <div className={s.userProfile}>
       {!userAvatar && <div className={s.avatar}><img src={defaultAvatar} alt={'Avatar'}/></div>}
       <div className={s.data}>

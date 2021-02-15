@@ -37,7 +37,7 @@ export const Login = () => {
     return <Redirect to={PATH.PROFILE}/>
   }
 
-  return (
+  return <div className={s.formWrapper}>
     <div className={s.container}>
       <h2 className={s.title}>Log in</h2>
       <div className={s.itemForm}>
@@ -66,5 +66,5 @@ export const Login = () => {
       {requestLoginError && <div className={s.requestError}>{requestLoginError}</div>}
 
     </div>
-  )
+  </div>
 }

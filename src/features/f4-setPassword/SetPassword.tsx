@@ -32,7 +32,7 @@ export const SetPassword = () => {
   const setPassHandler = () => {
     const pass1 = passValue1.trim()
     const pass2 = passValue2.trim()
-    if (!pass1 && !pass2 ) {
+    if (!pass1 && !pass2) {
       setValidateError('Password is required')
       return
     }
@@ -55,35 +55,36 @@ export const SetPassword = () => {
     return <Redirect to={'/login'}/>
   }
 
-  return <div className={s.container}>
-    <h2 className={s.title}>Set new password</h2>
-    <div className={s.itemForm}>
-      <input type='text' placeholder='New password...' value={passValue1} onChange={changePass1Handler}/>
+  return <div className={s.formWrapper}>
+    <div className={s.container}>
+      <h2 className={s.title}>Set new password</h2>
+      <div className={s.itemForm}>
+        <input type='text' placeholder='New password...' value={passValue1} onChange={changePass1Handler}/>
+      </div>
+      <div className={s.itemForm}>
+        <input type='text' placeholder='Confirm password...' value={passValue2} onChange={changePass2Handler}/>
+      </div>
+
+      {validateError &&
+      <div className={s.validateError}>
+        {validateError}
+      </div>}
+
+      {requestSetPasswordError &&
+      <div className={s.requestError}>
+        {requestSetPasswordError}
+      </div>}
+
+      <div className={s.itemForm}>
+        <button className={s.button} onClick={setPassHandler} disabled={appStatus === 'loading'}>Submit</button>
+      </div>
+
+      <div className={s.forgot}>
+        <NavLink to={PATH.REFRESH} className={s.link}>Forgot your password?</NavLink>
+      </div>
+
+
+      {appStatus === 'loading' && <div className={s.overflow}>Please, wait...</div>}
     </div>
-    <div className={s.itemForm}>
-      <input type='text' placeholder='Confirm password...' value={passValue2} onChange={changePass2Handler}/>
-    </div>
-
-    {validateError &&
-    <div className={s.validateError}>
-      {validateError}
-    </div>}
-
-    {requestSetPasswordError &&
-    <div className={s.requestError}>
-      {requestSetPasswordError}
-    </div>}
-
-    <div className={s.itemForm}>
-      <button className={s.button} onClick={setPassHandler}  disabled={appStatus === 'loading'}>Submit</button>
-    </div>
-
-    <div className={s.forgot}>
-      <NavLink to={PATH.REFRESH} className={s.link}>Forgot your password?</NavLink>
-    </div>
-
-
-    {appStatus === 'loading' && <div className={s.overflow}>Please, wait...</div>}
-
   </div>
 }
