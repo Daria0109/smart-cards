@@ -15,7 +15,6 @@ export const Login = () => {
 
   const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
   const appStatus = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-  const requestLoginError = useSelector<AppRootStateType, string | null>(state => state.auth.loginError)
   const dispatch = useDispatch()
 
 
@@ -30,7 +29,6 @@ export const Login = () => {
   }
   const onSubmit = () => {
     dispatch(login({email, password, rememberMe}))
-    dispatch(authActions.setLoginError(null))
   }
 
   if (isLoggedIn) {
@@ -63,7 +61,6 @@ export const Login = () => {
       {appStatus === 'loading' && <div className={s.overflow}>Please, wait...</div>}
 
 
-      {requestLoginError && <div className={s.requestError}>{requestLoginError}</div>}
 
     </div>
   </div>

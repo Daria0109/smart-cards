@@ -14,7 +14,6 @@ type ParamsType = {
 export const SetPassword = () => {
   const isPasswordChanged = useSelector<AppRootStateType, boolean>(state => state.auth.isPasswordChanged)
   const appStatus = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-  const requestSetPasswordError = useSelector<AppRootStateType, string | null>(state => state.auth.setPasswordError)
   const dispatch = useDispatch();
 
   const {token} = useParams<ParamsType>()
@@ -47,7 +46,6 @@ export const SetPassword = () => {
     if (token && pass1 === pass2) {
       dispatch(setPassword(pass1, token))
       setValidateError('')
-      dispatch(authActions.setPasswordError(null))
     }
   }
 
@@ -68,11 +66,6 @@ export const SetPassword = () => {
       {validateError &&
       <div className={s.validateError}>
         {validateError}
-      </div>}
-
-      {requestSetPasswordError &&
-      <div className={s.requestError}>
-        {requestSetPasswordError}
       </div>}
 
       <div className={s.itemForm}>

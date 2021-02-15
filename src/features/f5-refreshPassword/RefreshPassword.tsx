@@ -10,7 +10,6 @@ import {RequestStatusType} from '../../main/m3-bll/app-reducer';
 export const RefreshPassword = () => {
   const isEmailSent = useSelector<AppRootStateType, boolean>(state => state.auth.isEmailSent)
   const appStatus = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-  const sendEmailError = useSelector<AppRootStateType, string | null>(state => state.auth.refreshPasswordError)
   const dispatch = useDispatch();
 
   const [emailValue, setEmailValue] = useState('')
@@ -20,7 +19,6 @@ export const RefreshPassword = () => {
   }
   const sendEmailHandler = () => {
     dispatch(sendEmail(emailValue))
-    dispatch(authActions.setRefreshPasswordError(null))
   }
 
   return <div className={s.formWrapper}>
@@ -43,8 +41,6 @@ export const RefreshPassword = () => {
         <p>Success!</p>
         <p>The link was sent to your email!</p>
       </div>}
-
-      {sendEmailError && <div className={s.requestError}>{sendEmailError}</div>}
 
       <NavLink className={s.link} to={PATH.LOGIN}>Log In</NavLink>
 

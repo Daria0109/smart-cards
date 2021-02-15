@@ -10,12 +10,8 @@ export const setUserData = (userName: string | null, cardsCount: number | null, 
 export const setIsInitializedProfile = (isInitialized: boolean) => ({
   type: 'cards/app/SET-IS-INITIALIZED', isInitialized
 } as const)
-export const setProfileError = (errorText: string | null) => ({
-  type: 'cards/app/SET-ERROR', errorText
-} as const)
 export type ProfileActionsTypes = ReturnType<typeof setUserData>
   | ReturnType<typeof setIsInitializedProfile>
-  | ReturnType<typeof setProfileError>
 
 // S t a t e
 const profileInitState = {
@@ -24,7 +20,6 @@ const profileInitState = {
   userId: null as string | null,
   avatar: '',
   isInitialized: false,
-  error: null as string | null
 }
 export type ProfileStateType = typeof profileInitState
 
@@ -42,11 +37,6 @@ export const profileReducer = (state: ProfileStateType = profileInitState, actio
       return {
         ...state,
         isInitialized: action.isInitialized
-      }
-    case 'cards/app/SET-ERROR':
-      return {
-        ...state,
-        error: action.errorText
       }
     default:
       return {...state}

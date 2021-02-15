@@ -15,7 +15,6 @@ export const SignUp = () => {
 
   const isSignUp = useSelector<AppRootStateType, boolean>(state => state.auth.isSignUp)
   const appStatus = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-  const requestSignUpError = useSelector<AppRootStateType, string | null>(state => state.auth.signUpError)
   const status = useSelector<AppRootStateType, string>(state => state.app.status)
   const dispatch = useDispatch()
 
@@ -39,7 +38,6 @@ export const SignUp = () => {
     }
     if (pass1 === pass2) {
       dispatch(signUp({email, password}))
-      dispatch(authActions.setSignUpError(null))
     }
   }
 
@@ -62,7 +60,6 @@ export const SignUp = () => {
                onChange={confirmPasswordHandler}/>
       </div>
       {validateError && <div className={s.validateError}>{validateError}</div>}
-      {requestSignUpError && <div className={s.requestError}>{requestSignUpError}</div>}
       <div className={s.itemForm}>
         <button className={s.button} onClick={onSubmit} disabled={appStatus === 'loading'}>Submit</button>
       </div>
