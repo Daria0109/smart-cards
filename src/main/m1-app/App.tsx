@@ -1,29 +1,16 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Header} from '../m2-components/Header/Header';
 import {HashRouter} from 'react-router-dom';
 import {Routes} from '../m2-components/Routes/Routes';
 import s from './App.module.css'
-import {initializeProfile} from '../m3-bll/profile-reducer';
-import {authActions} from '../m3-bll/auth-reducer';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {AppRootStateType} from '../m3-bll/store';
-import {Preloader} from '../m2-components/Preloader/Preloader';
+import {AlertSnackBar} from '../m2-components/AlertSnackBar/AlertSnackBar';
 
 
 export const App = () => {
-  // const isInitialized = useSelector<AppRootStateType, boolean>(state => state.profile.isInitialized)
-  // const dispatch = useDispatch();
-  //
-  // useEffect(() => {
-  //   if (!isInitialized) {
-  //     dispatch(initializeProfile())
-  //   }
-  //   dispatch(authActions.setLoginError(null))
-  // }, [])
-  //
-  // if (!isInitialized) {
-  //   return <Preloader/>
-  // }
+  const error = useSelector<AppRootStateType, string | null>(state => state.app.requestError)
+
 
   return <div className={s.mainPage}>
     <HashRouter>
@@ -31,6 +18,7 @@ export const App = () => {
       <div className={s.mainContainer}>
         <Routes/>
       </div>
+      <AlertSnackBar isOpened={!!error} error={error}/>
     </HashRouter>
   </div>
 }

@@ -1,6 +1,6 @@
 // A c t i o n s
 import {Dispatch} from 'redux';
-import {AppActionsType, setAppStatus} from './app-reducer';
+import {AppActionsType, setAppStatus, setRequestError} from './app-reducer';
 import {authActions, AuthActionsType} from './auth-reducer';
 import {authAPI} from '../m4-dal/authAPI';
 
@@ -66,7 +66,7 @@ export const initializeProfile = () => {
       console.log('Initialized')
 
     } catch (error) {
-      dispatch((setProfileError(error.response ? error.response.data.error
+      dispatch((setRequestError(error.response ? error.response.data.error
         : error.message ? error.message
           : 'Some error occurred')))
       console.log('NOT Initialized')
