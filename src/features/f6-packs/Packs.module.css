@@ -41,3 +41,12 @@
 .page.active {
     font-weight: bold;
 }
+.active_page {
+    font-weight: bold;
+}
+.empty {
+    width: 20px;
+    height: 20px;
+    background-color: #775298;
+    margin-right: 3px;
+}

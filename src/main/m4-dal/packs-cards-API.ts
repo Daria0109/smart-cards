@@ -50,8 +50,8 @@ export const packsCardsAPI = {
   fetchPacks(pageNumber: number, pageSize: number, userId?: string) {
     return instance.get<GetResponsePacksCardsType>(userId
       ? `cards/pack?page=${pageNumber}&pageCount=${pageSize}&user_id=${userId}`
-      : `cards/pack?page=${pageNumber}&pageCount=${pageSize}`).
-      then(res => res.data)
+      : `cards/pack?page=${pageNumber}&pageCount=${pageSize}`)
+      .then(res => res.data)
   },
   createCardsPack(name: string) {
     return instance.post<PostResponsePacksCardsType>('cards/pack',{

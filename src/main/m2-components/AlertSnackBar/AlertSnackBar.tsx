@@ -13,7 +13,7 @@ export const AlertSnackBar: React.FC = () => {
   useEffect(() => {
     const timerId = setTimeout(() => {
       dispatch(appActions.setRequestError(null))
-    }, 3000)
+    }, 5000)
     return () => {
       clearTimeout(timerId)
     }
