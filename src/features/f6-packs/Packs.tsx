@@ -2,17 +2,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../main/m3-bll/store';
 import {
   createCardsPack, deleteCardsPack,
-  fetchPacks,
-  setActivePageNumber,
-  setActivePageSize,
-  setIsMyPacks
+  fetchPacks,packActions
 } from '../../main/m3-bll/packs-reducer';
 import React, {ChangeEvent, useEffect} from 'react';
 import {Preloader} from '../../main/m2-components/Preloader/Preloader';
 import {RequestStatusType} from '../../main/m3-bll/app-reducer';
 import s from './Packs.module.css'
 import {CardPackType} from '../../main/m4-dal/packs-cards-API';
-import {initializeProfile} from '../../main/m3-bll/profile-reducer';
+import {Redirect} from 'react-router-dom';
+import {PATH} from '../../main/m2-components/Routes/Routes';
+import {initializeUser} from '../../main/m3-bll/auth-reducer';
 
 
 const pageSizeArr = [10, 20, 30, 40, 50]
@@ -32,7 +31,7 @@ export const Packs = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      dispatch(initializeProfile())
+      dispatch(initializeUser())
     }
   }, [])
 
@@ -47,7 +46,7 @@ export const Packs = () => {
     dispatch(createCardsPack(pageSize, packName, isMyPacks))
   }
   const showMyPacksHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setIsMyPacks(!isMyPacks))
+    dispatch(packActions.setIsMyPacks(!isMyPacks))
   }
 
   const pagesCount = Math.ceil(pagesTotalCount / pageSize)
@@ -57,7 +56,7 @@ export const Packs = () => {
   }
   const pageElements = pagesArr.map(p => {
     const setActivePageHandler = () => {
-      dispatch(setActivePageNumber(p))
+      dispatch(packActions.setActivePageNumber(p))
     }
     return <span key={p}
                  className={p === pageNumber ? `${s.page} ${s.active}` : `${s.page}`}
@@ -65,7 +64,7 @@ export const Packs = () => {
   })
   const pageSizeElements = pageSizeArr.map(c => {
     const setActivePageSizeHandler = () => {
-      dispatch(setActivePageSize(c))
+      dispatch(packActions.setActivePageSize(c))
     }
     return <span key={c} style={{background: '#fff'}}
                  className={c === pageSize ? `${s.page} ${s.active}` : `${s.page}`}
@@ -81,6 +80,9 @@ export const Packs = () => {
 
   if (appStatus === 'loading') {
     return <Preloader/>
+  }
+  if (appStatus === 'failed') {
+    return <Redirect to={PATH.LOGIN}/>
   }
 
   return <div className={s.packsPage}>

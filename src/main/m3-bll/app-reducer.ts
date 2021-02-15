@@ -1,13 +1,14 @@
-// A c t i o n s
-export const setAppStatus = (status: RequestStatusType) => ({
-  type: 'cards/app/SET-STATUS', status
-} as const)
-export const setRequestError = (errorText: string | null) => ({
-  type: 'cards/app/SET-REQUEST-ERROR', errorText
-} as const)
+import {ActionsType} from './auth-reducer';
 
-export type AppActionsType = ReturnType<typeof setAppStatus>
-  | ReturnType<typeof setRequestError>
+
+// A c t i o n s
+export const appActions = {
+  setAppStatus: (status: RequestStatusType) => ({
+    type: 'cards/app/SET-STATUS', status} as const),
+  setRequestError: (errorText: string | null) => ({
+    type: 'cards/app/SET-REQUEST-ERROR', errorText} as const)
+}
+export type AppActionsType = ReturnType<ActionsType<typeof appActions>>
 
 
 // S t a t e

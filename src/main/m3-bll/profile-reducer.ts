@@ -1,17 +1,8 @@
 // A c t i o n s
-import {Dispatch} from 'redux';
-import {AppActionsType, setAppStatus, setRequestError} from './app-reducer';
-import {authActions, AuthActionsType} from './auth-reducer';
-import {authAPI} from '../m4-dal/authAPI';
-
 export const setUserData = (userName: string | null, cardsCount: number | null, userId: string | null) => ({
   type: 'cards/profile/SET-USER-DATA', userName, userId, cardsCount
 } as const)
-export const setIsInitializedProfile = (isInitialized: boolean) => ({
-  type: 'cards/app/SET-IS-INITIALIZED', isInitialized
-} as const)
 export type ProfileActionsTypes = ReturnType<typeof setUserData>
-  | ReturnType<typeof setIsInitializedProfile>
 
 // S t a t e
 const profileInitState = {
@@ -19,7 +10,6 @@ const profileInitState = {
   publicCardPacksCount: null as number | null,
   userId: null as string | null,
   avatar: '',
-  isInitialized: false,
 }
 export type ProfileStateType = typeof profileInitState
 
@@ -33,37 +23,9 @@ export const profileReducer = (state: ProfileStateType = profileInitState, actio
         publicCardPacksCount: action.cardsCount,
         userId: action.userId
       }
-    case 'cards/app/SET-IS-INITIALIZED':
-      return {
-        ...state,
-        isInitialized: action.isInitialized
-      }
     default:
       return {...state}
   }
 }
 
-
-// T h u n k
-export const initializeProfile = () => {
-  return async (dispatch: Dispatch<AppActionsType | ProfileActionsTypes | AuthActionsType>) => {
-    try {
-      dispatch(setAppStatus('loading'))
-      const data = await authAPI.me()
-      dispatch(authActions.setIsLoggedIn(true))
-      dispatch(setIsInitializedProfile(true))
-      dispatch(setUserData(data.name, data.publicCardPacksCount, data._id))
-      console.log('Initialized')
-
-    } catch (error) {
-      dispatch((setRequestError(error.response ? error.response.data.error
-        : error.message ? error.message
-          : 'Some error occurred')))
-      console.log('NOT Initialized')
-
-    } finally {
-      dispatch(setAppStatus('succeeded'))
-    }
-  }
-}
 
