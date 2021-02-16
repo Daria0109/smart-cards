@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.selector {
+    padding-top: 2px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    line-height: 18px;
+    margin-right: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #775298;
+    background-color: #fff;
+    border-radius: 4px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+.selector:hover  {
+    background: #775298;
+    color: #fff;
+}
+.active {
+    background-color: #775298;
+    color: #fff;
+}
+

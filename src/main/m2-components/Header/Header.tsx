@@ -30,20 +30,9 @@ export const Header = () => {
       </li>
 
       <li className={s.menuItem}>
-        <NavLink to={PATH.LOGIN} className={s.link} activeClassName={s.active}>Cards</NavLink>
-      </li>
-
-      {/*<li className={s.menuItem}>*/}
-      {/*  <NavLink to={PATH.SIGNUP} className={s.link} activeClassName={s.active}>Sign Up</NavLink>*/}
-      {/*</li>*/}
-
-      <li className={s.menuItem}>
         <NavLink to={PATH.REFRESH} className={s.link} activeClassName={s.active}>Forgot your password?</NavLink>
       </li>
 
-      {/*<li className={s.menuItem}>*/}
-      {/*  <NavLink to={PATH.SET} className={s.link} activeClassName={s.active}>Set password</NavLink>*/}
-      {/*</li>*/}
     </ul>
 
 
