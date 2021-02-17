@@ -1,0 +1,13 @@
+.searchInput {
+    display: inline-block;
+    width: 250px;
+    padding: 8px 4px 8px 25px;
+    font-size: 14px;
+    line-height: 16px;
+    outline: none;
+    border: 1px solid gray;
+    border-radius: 4px;
+    background-image: url("./../../../assets/search-icon.svg");
+    background-repeat: no-repeat;
+    background-position: left 4px center;
+}

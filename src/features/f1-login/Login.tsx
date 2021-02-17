@@ -4,8 +4,8 @@ import {AppRootStateType} from '../../main/m3-bll/store';
 import {authActions, login} from '../../main/m3-bll/auth-reducer';
 import {NavLink, Redirect} from 'react-router-dom';
 import {PATH} from '../../main/m2-components/Routes/Routes';
-import s from './Login.module.css'
 import {RequestStatusType} from '../../main/m3-bll/app-reducer';
+import s from './Login.module.css'
 
 
 export const Login = () => {

@@ -19,6 +19,9 @@ export const packActions = {
   } as const),
   setIsMyPacks: (isMine: boolean) => ({
     type: 'cards/packs/SET-IS-MY-PACKS', isMine
+  } as const),
+  setSearchPackName: (packName: string) => ({
+    type: 'cards/packs/SET-SEARCH-PACK-NAME', packName
   } as const)
 }
 export type PacksActionType = ReturnType<ActionsType<typeof packActions>>
@@ -30,7 +33,8 @@ const packsInitialState = {
   pageSize: 10,
   cardPacksTotalCount: 7,
   packName: 'Funny Bunny',
-  isMyPacks: false
+  isMyPacks: false,
+  searchPackName: ''
 }
 export type PackStateType = typeof packsInitialState;
 
@@ -61,6 +65,11 @@ export const packsReducer = (state: PackStateType = packsInitialState, action: P
         ...state,
         isMyPacks: action.isMine
       }
+    case 'cards/packs/SET-SEARCH-PACK-NAME':
+      return {
+        ...state,
+        searchPackName: action.packName
+      }
     default:
       return state
   }
@@ -73,12 +82,13 @@ export const fetchPacks = (pageNumber: number, pageSize: number) => {
       dispatch(appActions.setAppStatus('loading'))
       const isMine = getState().packs.isMyPacks
       const userId = getState().profile.userId
+      const packName = getState().packs.searchPackName
       let data;
       if (!isMine) {
-        data = await packsCardsAPI.fetchPacks(pageNumber, pageSize)
+        data = await packsCardsAPI.fetchPacks(pageNumber, pageSize, packName)
       } else {
         if (userId) {
-          data = await packsCardsAPI.fetchPacks(pageNumber, pageSize, userId)
+          data = await packsCardsAPI.fetchPacks(pageNumber, pageSize, packName, userId,)
         } else {
           throw new Error('NO USER_ID')
         }
@@ -95,7 +105,7 @@ export const fetchPacks = (pageNumber: number, pageSize: number) => {
     }
   }
 }
-export const createCardsPack = (pageSize: number, packName: string, isMine: boolean) => {
+export const createCardsPack = (pageSize: number, packName: string) => {
   return async (dispatch: Dispatch<PacksActionType | AppActionsType | any>) => {
     try {
       dispatch(appActions.setAppStatus('loading'))

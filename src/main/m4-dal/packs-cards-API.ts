@@ -47,10 +47,10 @@ export type DeleteResponsePacksCardsType = {
 }
 
 export const packsCardsAPI = {
-  fetchPacks(pageNumber: number, pageSize: number, userId?: string) {
+  fetchPacks(pageNumber: number, pageSize: number, packName: string, userId?: string) {
     return instance.get<GetResponsePacksCardsType>(userId
-      ? `cards/pack?page=${pageNumber}&pageCount=${pageSize}&user_id=${userId}`
-      : `cards/pack?page=${pageNumber}&pageCount=${pageSize}`)
+      ? `cards/pack?page=${pageNumber}&pageCount=${pageSize}&user_id=${userId}` + (packName ? `&packName=${packName}` : '')
+      : `cards/pack?page=${pageNumber}&pageCount=${pageSize}` + (packName ? `&packName=${packName}` : ''))
       .then(res => res.data)
   },
   createCardsPack(name: string) {
