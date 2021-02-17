@@ -22,6 +22,9 @@ export const packActions = {
   } as const),
   setSearchPackName: (packName: string) => ({
     type: 'cards/packs/SET-SEARCH-PACK-NAME', packName
+  } as const),
+  setSortPacksValue: (sortValue: string) => ({
+    type: 'cards/packs/SET-SORT-PACKS-VALUE', sortValue
   } as const)
 }
 export type PacksActionType = ReturnType<ActionsType<typeof packActions>>
@@ -31,10 +34,11 @@ const packsInitialState = {
   cardPacks: [] as Array<CardPackType>,
   pageNumber: 1,
   pageSize: 10,
-  cardPacksTotalCount: 7,
-  packName: 'Funny Bunny',
+  cardPacksTotalCount: 0,
+  packName: 'Super Pack',
   isMyPacks: false,
-  searchPackName: ''
+  searchPackName: '',
+  sortPacksValue: ''
 }
 export type PackStateType = typeof packsInitialState;
 
@@ -70,6 +74,11 @@ export const packsReducer = (state: PackStateType = packsInitialState, action: P
         ...state,
         searchPackName: action.packName
       }
+    case 'cards/packs/SET-SORT-PACKS-VALUE':
+      return {
+        ...state,
+        sortPacksValue: action.sortValue
+      }
     default:
       return state
   }
@@ -83,12 +92,13 @@ export const fetchPacks = (pageNumber: number, pageSize: number) => {
       const isMine = getState().packs.isMyPacks
       const userId = getState().profile.userId
       const packName = getState().packs.searchPackName
+      const sortPacks = getState().packs.sortPacksValue
       let data;
       if (!isMine) {
-        data = await packsCardsAPI.fetchPacks(pageNumber, pageSize, packName)
+        data = await packsCardsAPI.fetchPacks(pageNumber, pageSize, packName, sortPacks)
       } else {
         if (userId) {
-          data = await packsCardsAPI.fetchPacks(pageNumber, pageSize, packName, userId,)
+          data = await packsCardsAPI.fetchPacks(pageNumber, pageSize, packName, sortPacks, userId)
         } else {
           throw new Error('NO USER_ID')
         }

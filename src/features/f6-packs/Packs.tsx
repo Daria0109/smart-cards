@@ -13,6 +13,7 @@ import {Paginator} from '../../main/m2-components/Paginator/Paginator';
 import {PageSizeSelector} from '../../main/m2-components/PageSizeSelector/PageSizeSelector';
 import {PacksTableRow} from './PacksTableRow/PacksTableRow';
 import {SearchForm} from '../../main/m2-components/SearchForm/SearchForm';
+import { Sort } from '../../main/m2-components/Sort/Sort';
 
 
 export const Packs = () => {
@@ -25,6 +26,7 @@ export const Packs = () => {
   const isMyPacks = useSelector<AppRootStateType, boolean>(state => state.packs.isMyPacks)
   const userId = useSelector<AppRootStateType, string | null>(state => state.profile.userId)
   const searchPackName = useSelector<AppRootStateType, string>(state => state.packs.searchPackName)
+  const sortPacksValue = useSelector<AppRootStateType, string>(state => state.packs.sortPacksValue)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,7 +39,7 @@ export const Packs = () => {
     if (isLoggedIn) {
       dispatch(fetchPacks(pageNumber, pageSize))
     }
-  }, [isLoggedIn, pageNumber, pageSize, isMyPacks, searchPackName])
+  }, [isLoggedIn, pageNumber, pageSize, isMyPacks, searchPackName, sortPacksValue])
 
 
   const addPackHandler = () => {
@@ -75,7 +77,9 @@ export const Packs = () => {
     <div className={s.table}>
       <div className={s.headerTable}>
         <div className={s.headerItem}>Title</div>
-        <div className={s.headerItem}>Count of cards</div>
+        <div className={s.headerItem}>Count of cards
+          <Sort up={'0cardsCount'} down={'1cardsCount'}/>
+        </div>
         <div className={s.headerItem}>Updated</div>
         <div className={s.headerItem}>Cards</div>
         <div className={s.headerItem}>Delete</div>
@@ -92,6 +96,7 @@ export const Packs = () => {
 
   </div>
 }
+
 
 
 

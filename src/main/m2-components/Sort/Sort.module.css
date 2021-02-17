@@ -1,0 +1,30 @@
+.sort {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    cursor: pointer;
+    line-height: 1;
+    width: 25px;
+    height: 25px;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+.up {
+    transform: rotate(270deg);
+}
+
+.down {
+    transform: rotate(90deg);
+}
+
+.button:hover, .active {
+    background-color: #ff7b5b;
+    color: #fff;
+}
