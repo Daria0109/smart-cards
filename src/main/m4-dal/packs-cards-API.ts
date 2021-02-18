@@ -1,4 +1,6 @@
 import axios from 'axios';
+import {stringify} from 'querystring';
+import {finished} from 'stream';
 
 
 const baseLocalhostURL = 'http://localhost:7542/2.0/'
@@ -35,6 +37,40 @@ export type GetResponsePacksCardsType = {
   token: string
   tokenDeathTime: number
 }
+
+export type CardType = {
+  _id: string
+  cardsPack_id: string
+  user_id: string
+  answer: string
+  question: string
+  grade: number
+  shots: number
+  comments: string
+  type: 'card',
+  rating: number
+  more_id: string
+  created: string
+  updated: string
+  __v: number
+  answerImg: string
+  answerVideo: string
+  questionImg: string
+  questionVideo: string
+}
+export type GetResponseCardsType = {
+  cards: Array<CardType>
+  packUserId: string
+  page: number
+  pageCount: number
+  cardsTotalCount: number
+  minGrade: number
+  maxGrade: number
+  token: string
+  tokenDeathTime: number
+}
+
+
 export type PostResponsePacksCardsType = {
   newCardsPack: CardPackType
   token: string
@@ -56,7 +92,7 @@ export const packsCardsAPI = {
       .then(res => res.data)
   },
   createCardsPack(name: string) {
-    return instance.post<PostResponsePacksCardsType>('cards/pack',{
+    return instance.post<PostResponsePacksCardsType>('cards/pack', {
       cardsPack: {name}
     }).then(res => res.data)
   },

@@ -50,5 +50,5 @@ export const Paginator = React.memo(() => {
     {<button className={`${s.item} ${s.button}`}
              onClick={nextButtonHandler}
             disabled={pageNumber === Math.ceil(packsTotalCount / pageSize)}>&#187;</button>}
-  </div>
+</div>
 })

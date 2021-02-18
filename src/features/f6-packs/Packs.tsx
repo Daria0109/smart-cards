@@ -14,6 +14,7 @@ import {PageSizeSelector} from '../../main/m2-components/PageSizeSelector/PageSi
 import {PacksTableRow} from './PacksTableRow/PacksTableRow';
 import {SearchForm} from '../../main/m2-components/SearchForm/SearchForm';
 import { Sort } from '../../main/m2-components/Sort/Sort';
+import ReactPaginate from 'react-paginate';
 
 
 export const Packs = () => {
@@ -27,6 +28,7 @@ export const Packs = () => {
   const userId = useSelector<AppRootStateType, string | null>(state => state.profile.userId)
   const searchPackName = useSelector<AppRootStateType, string>(state => state.packs.searchPackName)
   const sortPacksValue = useSelector<AppRootStateType, string>(state => state.packs.sortPacksValue)
+  const totalPacksCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -93,6 +95,7 @@ export const Packs = () => {
       <PageSizeSelector/>
       <Paginator/>
     </div>
+
 
   </div>
 }

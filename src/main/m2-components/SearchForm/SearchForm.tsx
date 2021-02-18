@@ -12,7 +12,7 @@ export const SearchForm: React.FC = () => {
 
   const debouncedSearch = useCallback(debounce((nextValue: string) => {
     dispatch(packActions.setSearchPackName(nextValue))
-  }, 2000), [dispatch])
+  }, 1500), [dispatch])
 
   const changeValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const nextSearchValue = e.currentTarget.value
