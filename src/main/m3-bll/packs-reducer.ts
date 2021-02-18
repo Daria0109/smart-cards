@@ -25,7 +25,9 @@ export const packActions = {
   } as const),
   setSortPacksValue: (sortValue: string) => ({
     type: 'cards/packs/SET-SORT-PACKS-VALUE', sortValue
-  } as const)
+  } as const),
+  setOpenedPackId: (packId: string) => ({
+    type: 'cards/cards/SET-OPENED-PACK-ID', packId}as const)
 }
 export type PacksActionType = ReturnType<ActionsType<typeof packActions>>
 
@@ -38,7 +40,8 @@ const packsInitialState = {
   packName: 'Super Pack',
   isMyPacks: false,
   searchPackName: '',
-  sortPacksValue: ''
+  sortPacksValue: '',
+  openedPackId: ''
 }
 export type PackStateType = typeof packsInitialState;
 
@@ -78,6 +81,11 @@ export const packsReducer = (state: PackStateType = packsInitialState, action: P
       return {
         ...state,
         sortPacksValue: action.sortValue
+      }
+    case 'cards/cards/SET-OPENED-PACK-ID':
+      return {
+        ...state,
+        openedPackId: action.packId
       }
     default:
       return state

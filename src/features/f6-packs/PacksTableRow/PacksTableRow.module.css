@@ -3,6 +3,9 @@
     align-items: center;
     border-bottom: 1px solid #4e4e4e;
 }
+.opened {
+    background-color: #ffffff;
+}
 .row:last-child {
     border-bottom: none;
 }

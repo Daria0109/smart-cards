@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../main/m3-bll/store';
 import {createCardsPack, fetchPacks, packActions} from '../../main/m3-bll/packs-reducer';
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {Preloader} from '../../main/m2-components/Preloader/Preloader';
 import {RequestStatusType} from '../../main/m3-bll/app-reducer';
 import s from './Packs.module.css'
@@ -13,8 +13,7 @@ import {Paginator} from '../../main/m2-components/Paginator/Paginator';
 import {PageSizeSelector} from '../../main/m2-components/PageSizeSelector/PageSizeSelector';
 import {PacksTableRow} from './PacksTableRow/PacksTableRow';
 import {SearchForm} from '../../main/m2-components/SearchForm/SearchForm';
-import { Sort } from '../../main/m2-components/Sort/Sort';
-import ReactPaginate from 'react-paginate';
+import {Sort} from '../../main/m2-components/Sort/Sort';
 
 
 export const Packs = () => {
@@ -49,6 +48,12 @@ export const Packs = () => {
   }
   const showMyPacksHandler = () => {
     dispatch(packActions.setIsMyPacks(!isMyPacks))
+  }
+  const setActivePacksPageSize = useCallback((pageSize: number) => {
+    dispatch(packActions.setActivePageSize(pageSize))
+  }, [])
+  const setActivePacksPageNumber = (page: number) => {
+    dispatch(packActions.setActivePageNumber(page))
   }
 
   const tableRows = cardPacks.map(p => <PacksTableRow key={p.created}
@@ -92,8 +97,11 @@ export const Packs = () => {
       </div>
     </div>
     <div className={s.pageControls}>
-      <PageSizeSelector/>
-      <Paginator/>
+      <PageSizeSelector pageSize={pageSize} setActivePageSize={setActivePacksPageSize}/>
+      <Paginator totalItemsCount={totalPacksCount}
+                 setActivePageNumber={setActivePacksPageNumber}
+                 pageNumber={pageNumber}
+                 pageSize={pageSize}/>
     </div>
 
 

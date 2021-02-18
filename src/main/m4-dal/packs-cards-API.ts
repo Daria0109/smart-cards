@@ -99,5 +99,9 @@ export const packsCardsAPI = {
   deleteCardsPack(packId: string) {
     return instance.delete<DeleteResponsePacksCardsType>(`cards/pack?id=${packId}`)
       .then(res => res.data)
+  },
+  fetchCards(packId: string, pageNumber: number, pageSize: number) {
+    return instance.get<GetResponseCardsType>(`cards/card?cardsPack_id=${packId}&page=${pageNumber}&pageCount=${pageSize}`)
+      .then(res => res.data)
   }
 }
