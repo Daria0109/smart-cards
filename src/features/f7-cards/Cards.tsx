@@ -23,6 +23,7 @@ export const Cards = () => {
   const pageNumber = useSelector<AppRootStateType, number>(state => state.cards.pageNumber)
   const pageSize = useSelector<AppRootStateType, number>(state => state.cards.pageSize)
   const cardsTotalCount = useSelector<AppRootStateType, number>(state => state.cards.cardsTotalCount)
+  const searchCardQuestion = useSelector<AppRootStateType, string>(state => state.cards.searchCardQuestion)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -34,15 +35,18 @@ export const Cards = () => {
     if (isLoggedIn && packId) {
       dispatch(fetchCards(packId))
     }
-  }, [packId, pageNumber, pageSize])
+  }, [pageNumber, pageSize])
   const addCardHandler = () => {
   }
 
   const setActiveCardsPageSize = useCallback((pageSize: number) => {
     dispatch(cardsActions.setActivePageSize(pageSize))
   }, [])
-  const setActiveCardsPageNumber = (page: number) => {
+  const setActiveCardsPageNumber = useCallback((page: number) => {
     dispatch(cardsActions.setActivePageNumber(page))
+  }, [])
+  const searchCardQuestionHandler = (value: string) => {
+    dispatch(cardsActions.setSearchQuestion(value))
   }
 
   const tableRows = cards.map(c => <CardsTableRow key={c._id}
@@ -62,16 +66,17 @@ export const Cards = () => {
   return <div className={s.cardsPage}>
     <div className={s.tableControls}>
       <button className={s.button} onClick={addCardHandler}>Add new Card</button>
-      <SearchForm/>
+      <SearchForm searchParam={searchCardQuestion}
+                  placeholder={'Question...'} search={searchCardQuestionHandler}/>
     </div>
     <div className={s.table}>
       <div className={s.headerTable}>
-        <div className={s.headerItem}>Answer</div>
         <div className={s.headerItem}>Question</div>
+        <div className={s.headerItem}>Answer</div>
         <div className={s.headerItem}>Grade</div>
         <div className={s.headerItem}>Comments</div>
-        <div className={s.headerItem}>Delete</div>
         <div className={s.headerItem}>Update</div>
+        <div className={s.headerItem}>Delete</div>
       </div>
       <div className={s.rows}>
         {tableRows}

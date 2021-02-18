@@ -19,18 +19,17 @@ export const CardsTableRow: React.FC<CardItemPropsType> = ({answer, cardId, isOw
   }
 
   return <div className={s.row}>
-    <div className={s.rowItem}>{answer}</div>
     <div className={s.rowItem}>{question}</div>
+    <div className={s.rowItem}>{answer}</div>
     <div className={s.rowItem}>{grade}</div>
     <div className={s.rowItem}>{comments}</div>
     <div className={s.rowItem}>
       {isOwner
-      && <button className={s.button} onClick={deleteCardHandler}>Delete</button>}
+      && <button className={s.button}>Update</button>}
     </div>
-
     <div className={s.rowItem}>
       {isOwner
-      && <button className={s.button}>Update</button>}
+      && <button className={s.button} onClick={deleteCardHandler}>Delete</button>}
     </div>
 
   </div>

@@ -52,9 +52,12 @@ export const Packs = () => {
   const setActivePacksPageSize = useCallback((pageSize: number) => {
     dispatch(packActions.setActivePageSize(pageSize))
   }, [])
-  const setActivePacksPageNumber = (page: number) => {
+  const setActivePacksPageNumber = useCallback((page: number) => {
     dispatch(packActions.setActivePageNumber(page))
-  }
+  }, [])
+  const searchPackNameHandler = useCallback((value: string) => {
+    packActions.setSearchPackName(value)
+  }, [])
 
   const tableRows = cardPacks.map(p => <PacksTableRow key={p.created}
                                                       title={p.name}
@@ -71,7 +74,7 @@ export const Packs = () => {
 
   return <div className={s.packsPage}>
     <div className={s.tableControls}>
-      <div >
+      <div>
         <div className={s.showMine}>
           <input type='checkbox' id='myPacks' checked={isMyPacks} onChange={showMyPacksHandler}/>
           <label htmlFor='myPacks'>Show my packs</label>
@@ -80,7 +83,10 @@ export const Packs = () => {
           <button className={s.button} onClick={addPackHandler}>Add new Pack</button>
         </div>
       </div>
-      <SearchForm/></div>
+      <SearchForm searchParam={searchPackName}
+                  placeholder={'Title...'}
+                  search={searchPackNameHandler}/>
+    </div>
     <div className={s.table}>
       <div className={s.headerTable}>
         <div className={s.headerItem}>Title</div>

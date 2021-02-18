@@ -17,6 +17,9 @@ export const cardsActions = {
   setActivePageNumber: (pageNumber: number) => ({
     type: 'cards/cards/SET-ACTIVE-PAGE-NUMBER', pageNumber
   } as const),
+  setSearchQuestion: (question: string) => ({
+    type: 'cards/packs/SET-SEARCH-QUESTION', question
+  } as const),
 }
 export type CardsActionType = ReturnType<ActionsType<typeof cardsActions>>
 
@@ -27,7 +30,7 @@ const cardsInitialState = {
   pageSize: 10,
   cardsTotalCount: 0,
   cardName: 'Super Card',
-  searchCardName: '',
+  searchCardQuestion: '',
   sortCardsValues: ''
 }
 export type CardsStateType = typeof cardsInitialState;
@@ -53,6 +56,11 @@ export const cardsReducer = (state: CardsStateType = cardsInitialState, action: 
       return {
         ...state,
         pageNumber: action.pageNumber
+      }
+    case 'cards/packs/SET-SEARCH-QUESTION':
+      return {
+        ...state,
+        searchCardQuestion: action.question
       }
     default:
       return state
